@@ -1,0 +1,426 @@
+<!DOCTYPE html><html lang="vi"><head><meta name="robots" content="noindex"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mr. Bean đi Phú Quốc · Chia tiền</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@600;800;900&family=Nunito:wght@500;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+/* === BASE (viewport-base.css) === */
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   Slides are authored at 1920×1080 and scaled as a whole.
+   =========================================== */
+
+/* 1. Lock the browser viewport */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 2. Full-window deck viewport */
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 3. Fixed 16:9 design canvas.
+   JavaScript sets transform: translate(...) scale(...). */
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff);
+}
+
+/* 4. Slides stack inside the fixed stage.
+   Content must be laid out at 1920×1080, not reflowed per device. */
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff);
+}
+
+.slide.active,
+.slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+/* 5. Keep media inside authored slide bounds */
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 6. Presentation chrome stays outside the slide design system */
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* 7. Print one fixed-size slide per page */
+@media print {
+    html,
+    body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+    }
+
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    .deck-controls {
+        display: none !important;
+    }
+}
+
+/* 8. Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+/* === THEME: Mr. Bean, British sitcom === */
+:root{--night:#0F1526;--paper:#F6EEDC;--paper2:#EFE4CC;--ink:#1B1A17;--mini:#A9C24B;--mini2:#7E9632;--tweed:#7A5A3C;--tie:#C0392B;--mute:#7C7262;--stage-bg:#0F1526;--slide-bg:var(--paper)}
+@page{size:1920px 1080px;margin:0}
+.slide{font-family:'Nunito',sans-serif;color:var(--ink);padding:84px 120px;box-sizing:border-box;
+ background:var(--paper) repeating-linear-gradient(45deg,rgba(122,90,60,.035) 0 2px,transparent 2px 6px),repeating-linear-gradient(-45deg,rgba(122,90,60,.035) 0 2px,transparent 2px 6px)}
+h1,h2{font-family:'Grandstander',cursive;margin:0;letter-spacing:-.01em}
+h2{font-size:66px;font-weight:800;line-height:1.05}
+.kick{display:inline-block;font:800 20px 'Nunito';letter-spacing:.2em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:8px 16px;border-radius:4px;transform:rotate(-1.5deg)}
+.sub{font:500 26px/1.4 'Nunito';color:var(--mute);margin-top:12px}
+.hand{font-family:'Patrick Hand',cursive}
+.pg{position:absolute;right:120px;bottom:44px;font:700 20px 'Nunito';color:var(--mute)}
+.ep{position:absolute;left:120px;bottom:44px;font:700 20px 'Nunito';color:var(--mute)}
+.tie{width:40px;height:90px}
+/* === COVER === */
+.cover{background:radial-gradient(ellipse 60% 70% at 30% 100%,#1d2742 0,var(--night) 70%);color:var(--paper);padding:0}
+.stars{position:absolute;inset:0;background-image:radial-gradient(2px 2px at 10% 20%,#fff8 50%,transparent 51%),radial-gradient(2px 2px at 30% 8%,#fff6 50%,transparent 51%),radial-gradient(3px 3px at 55% 14%,#fff9 50%,transparent 51%),radial-gradient(2px 2px at 70% 30%,#fff5 50%,transparent 51%),radial-gradient(2px 2px at 88% 10%,#fff8 50%,transparent 51%),radial-gradient(2px 2px at 45% 40%,#fff4 50%,transparent 51%),radial-gradient(2px 2px at 20% 45%,#fff5 50%,transparent 51%)}
+.beam{position:absolute;left:150px;top:-40px;width:900px;height:1120px;background:linear-gradient(180deg,rgba(255,244,214,.38),rgba(255,244,214,.10) 75%,rgba(255,244,214,.04));clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);filter:blur(2px)}
+.pool{position:absolute;left:120px;bottom:40px;width:960px;height:120px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,244,214,.35),transparent 70%)}
+.cv-t{position:absolute;left:200px;top:150px;width:800px;text-align:center}
+.cv-t .ep1{font:800 22px 'Nunito';letter-spacing:.3em;color:#E8D9B5;text-transform:uppercase}
+.cv-t h1{font-size:170px;font-weight:900;line-height:.95;margin-top:26px;color:#FFF6E2;text-shadow:0 6px 0 rgba(0,0,0,.35)}
+.cv-t h1 span{display:block;font-size:104px;color:var(--mini);font-weight:800;margin-top:10px}
+.cv-t .with{font:500 28px/1.5 'Nunito';color:#E8D9B5;margin-top:28px}
+.cv-t .with b{color:#fff}
+.cover .mini{position:absolute;left:420px;bottom:96px;width:340px;transform:scaleX(-1);animation:drive 6s ease-in-out infinite alternate}
+@keyframes drive{to{transform:scaleX(-1) translateX(-40px)}}
+.photo{position:absolute;right:150px;top:80px;width:580px;height:740px;background:#fff;padding:20px 20px 80px;box-sizing:border-box;transform:rotate(3deg);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.photo div{width:100%;height:100%;background:url(img/g_arch.jpg) center 60%/cover}
+.photo p{position:absolute;left:0;right:0;bottom:18px;text-align:center;margin:0;font:32px 'Patrick Hand';color:var(--ink)}
+.tape{position:absolute;top:-22px;left:50%;width:170px;height:46px;margin-left:-85px;background:rgba(232,217,181,.85);transform:rotate(-4deg)}
+.hud{position:absolute;right:120px;bottom:70px;width:760px;display:grid;grid-template-columns:1.2fr 1fr .6fr;background:var(--paper);color:var(--ink);border-radius:10px;padding:22px 30px;box-sizing:border-box;transform:rotate(-1deg);box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.hud p{margin:0;font:700 18px 'Nunito';color:var(--mute)}
+.hud b{display:block;font:800 40px 'Grandstander';margin-top:4px}
+/* === TIMELINE === */
+.tl{position:absolute;left:120px;top:300px}
+.tl .band{font:800 22px 'Nunito';fill:var(--mute);text-anchor:middle;letter-spacing:.06em}
+.tl .grid{stroke:#1B1A1722;stroke-dasharray:4 6}
+.tl .ax{font:700 18px 'Nunito';fill:var(--mute);text-anchor:end}
+.tl .area{fill:rgba(169,194,75,.28)}
+.tl .step{fill:none;stroke:var(--mini2);stroke-width:5;stroke-linejoin:round}
+.tl .road{stroke:#3a3631;stroke-width:26}
+.tl .roadmark{stroke:#F6EEDC;stroke-width:3;stroke-dasharray:18 16}
+.tl .dot{fill:var(--paper);stroke:var(--ink);stroke-width:4}
+.tl .dot.big{fill:var(--mini)}
+.tl .tick{stroke:#1B1A1740;stroke-width:2}
+.tl .lt{font:700 17px 'Nunito';fill:var(--mute);text-anchor:middle}
+.tl .lp{font:800 19px 'Nunito';fill:var(--ink);text-anchor:middle}
+.tl .lv{font:400 26px 'Patrick Hand';fill:var(--ink);text-anchor:middle}
+.tl .lv.hot{fill:var(--mini2)}
+.tl .pill{fill:var(--ink)}
+.tl .pt{font:800 21px 'Nunito';fill:var(--paper);text-anchor:middle}
+.legend{position:absolute;right:120px;top:100px;width:620px;font-size:20px!important;font:500 22px/1.45 'Nunito';color:var(--mute)}
+.legend i{display:inline-block;width:16px;height:16px;border-radius:50%;background:var(--mini);border:3px solid var(--ink);vertical-align:-2px;margin-right:6px}
+.legend s{display:inline-block;width:36px;height:5px;background:var(--mini2);vertical-align:5px;margin-right:6px;text-decoration:none}
+/* === CATEGORIES === */
+.cchart{margin-top:64px}
+.crow{display:grid;grid-template-columns:300px 1fr 400px;align-items:center;gap:30px;height:110px;border-bottom:2px dashed #1B1A1720}
+.clab{font:800 32px 'Nunito'}
+.ctrack{height:54px}
+.cbar{height:100%;width:var(--w);background:var(--tweed);border-radius:6px;border:3px solid var(--ink);box-sizing:border-box}
+.cbar.big{background:var(--mini)}
+.cval b{display:block;font:800 36px 'Grandstander'}
+.cval span{font:500 21px 'Nunito';color:var(--mute)}
+.teddy{position:absolute;right:120px;top:84px;width:150px;transform:rotate(8deg)}
+/* === WHO PAID === */
+.cols{position:absolute;left:120px;right:120px;bottom:90px;height:740px;display:grid;grid-template-columns:repeat(5,1fr);gap:40px;align-items:end}
+.col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.cv{font:800 34px 'Grandstander';margin-bottom:10px}
+.cb{width:180px;background:var(--tweed);border:4px solid var(--ink);border-bottom:0;border-radius:10px 10px 0 0;box-sizing:border-box;display:flex;justify-content:center;padding-top:18px}
+.bean .cb{background:var(--mini)}
+.cn{font:800 34px 'Nunito';border-top:6px solid var(--ink);width:100%;text-align:center;padding-top:14px}
+.cr{font:26px 'Patrick Hand';color:var(--tweed);margin-top:-2px}
+.cs{margin-top:6px;font:800 21px 'Nunito'}
+.pos{color:var(--mini2)} .neg{color:#2F6FA3}
+.share{position:absolute;left:120px;right:120px;border-top:4px dashed var(--mini2);bottom:calc(90px + 150px + var(--h))}
+.share span{position:absolute;right:0;top:-40px;font:28px 'Patrick Hand';color:var(--mini2)}
+.ft{height:150px;width:100%;text-align:center}
+/* === CHEQUES === */
+.cqs{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:30px}
+.cq{position:relative;height:340px;border-radius:10px;padding:26px 34px;box-sizing:border-box;border:3px solid #4F6B2A;
+ background:repeating-radial-gradient(circle at 80% 30%,rgba(169,194,75,.18) 0 2px,transparent 2px 9px),linear-gradient(135deg,#F4F7E4,#E4EDC4);box-shadow:0 10px 24px rgba(27,26,23,.15)}
+.cq:nth-child(odd){transform:rotate(-.8deg)} .cq:nth-child(even){transform:rotate(.8deg)}
+.cqh{display:flex;align-items:baseline;gap:18px;border-bottom:2px solid #4F6B2A;padding-bottom:12px}
+.bank{font:900 28px 'Grandstander';color:#2F4416}
+.br{font:700 17px 'Nunito';color:#4F6B2A;flex:1}
+.dt{font:700 18px 'Nunito';color:#4F6B2A}
+.cqpay{margin-top:14px;font:700 22px 'Nunito';color:#4F6B2A}
+.cqpay .hand{font-size:46px;color:#1B2F7A;margin-left:12px;border-bottom:2px dotted #4F6B2A;padding:0 40px 0 6px}
+.cqw{margin-top:12px;font:700 18px 'Nunito';color:#4F6B2A}
+.cqw .sm{font-size:25px;line-height:1.15;color:#1B2F7A}
+.cqf{position:absolute;left:34px;right:34px;bottom:24px;display:flex;justify-content:space-between;align-items:flex-end}
+.amt{font:900 42px 'Grandstander';background:#fff;border:3px solid #4F6B2A;border-radius:8px;padding:6px 22px}
+.sig{text-align:center;border-top:2px solid #4F6B2A;min-width:280px;padding-top:4px;position:relative}
+.sig .hand{position:absolute;bottom:26px;left:0;right:0;font-size:44px;color:#1B2F7A;transform:rotate(-4deg)}
+.sig i{font:700 15px 'Nunito';color:#4F6B2A;font-style:normal}
+/* === LEDGER === */
+.ledger{display:grid;grid-template-columns:1fr 1fr .9fr;gap:40px;margin-top:30px}
+.lg{background:#FFFDF6;padding:20px 26px;box-shadow:0 8px 20px rgba(27,26,23,.12);margin-bottom:24px;
+ -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 12px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/24px 12px repeat-x}
+.lg h4{margin:0 0 8px;font:800 30px 'Grandstander';display:flex;justify-content:space-between;border-bottom:3px solid var(--ink);padding-bottom:8px}
+.lg h4 span{color:var(--mini2)}
+.lg table{width:100%;border-collapse:collapse;font:600 21px 'Nunito'}
+.lg td{padding:6px 0;border-bottom:1px dashed #1B1A1730}
+.lg td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:800}
+.note{font:26px 'Patrick Hand';color:var(--mute);margin:6px 0 0}
+/* === THE END === */
+.end{background:var(--night);color:var(--paper)}
+.end h1{font-size:200px;font-weight:900;text-align:center;margin-top:40px;color:#FFF6E2}
+.end .tag{text-align:center;font:500 30px 'Nunito';color:#E8D9B5;margin-top:4px}
+.album{position:absolute;left:0;right:0;bottom:120px;display:flex;justify-content:center;gap:50px}
+.pol{background:#fff;padding:16px 16px 60px;width:440px;height:330px;box-sizing:content-box;position:relative;box-shadow:0 20px 40px rgba(0,0,0,.5)}
+.pol div{width:100%;height:100%;background:center/cover}
+.pol p{position:absolute;left:0;right:0;bottom:12px;margin:0;text-align:center;font:30px 'Patrick Hand';color:var(--ink)}
+.pol:nth-child(1){transform:rotate(-5deg)} .pol:nth-child(2){transform:rotate(2deg) translateY(-30px)} .pol:nth-child(3){transform:rotate(-2deg)}
+.clip{position:absolute;left:0;right:0;bottom:40px;text-align:center;font:700 22px 'Nunito';color:#E8D9B5}
+.clip a{color:var(--mini)}
+/* === STICKERS (Bean, Mini, xe xanh, gấu) === */
+.st{position:absolute;z-index:3}
+.cover .reliant{left:790px;bottom:100px;width:195px;transform:scaleX(-1);animation:drive 6s ease-in-out .4s infinite alternate}
+.s2 .reliant{left:1330px;bottom:22px;width:105px}
+.s3 .reliant{left:1180px;bottom:34px;width:145px;transform:rotate(14deg)}
+.s4 .mrb{right:150px;top:30px;width:130px}
+.s5 .mini2{left:520px;bottom:12px;width:140px}
+.s6 .ted2{left:140px;bottom:40px;width:120px;transform:rotate(-8deg)}
+.s6 .mini2{right:430px;bottom:60px;width:230px}
+.s6 .reliant{right:200px;bottom:62px;width:190px;transform:rotate(-16deg)}
+.end .mrb{left:150px;top:70px;width:150px}
+.end .mini2{right:140px;top:110px;width:250px;animation:drive2 6s ease-in-out infinite alternate}
+@keyframes drive2{to{transform:translateX(-40px)}}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.slide.active .mrb{animation:bob 2.4s ease-in-out infinite}
+/* === MOTION (HTML only) === */
+.slide.active .rise{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}}
+.slide.active .cb{animation:grow .9s cubic-bezier(.2,.8,.2,1) both;transform-origin:bottom}
+@keyframes grow{from{transform:scaleY(0)}}
+.slide.active .cbar{animation:growx .9s cubic-bezier(.2,.8,.2,1) both;transform-origin:left}
+@keyframes growx{from{transform:scaleX(0)}}
+@media print{.rise,.cb,.cbar,.mini,.st{animation:none!important}}
+</style></head><body>
+<div class="deck-viewport"><div class="deck-stage">
+
+<!-- 1 COVER -->
+<section class="slide cover active"><div class="stars"></div><div class="beam"></div><div class="pool"></div>
+<div class="cv-t rise"><div class="ep1">Tập đặc biệt · 23–25.10.2026</div>
+<h1>Mr. Bean<span>đi Phú Quốc</span></h1>
+<div class="with">Có sự tham gia của <b>Thái Bo, Đại Du, Đạt nhỏ, Thâu Skyler</b><br>và một bảng chia tiền</div></div>
+<svg class="mini" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="5" stroke-linejoin="round">
+<path d="M18 92 Q14 62 40 58 L78 56 L104 22 Q110 16 122 16 L206 16 Q218 16 224 24 L250 56 L276 60 Q292 64 290 92 Z" fill="#A9C24B"/>
+<path d="M226 26 L250 56 L276 60 Q292 64 290 92 L238 92 L238 28 Z" fill="#1B1A17"/>
+<path d="M112 26 L160 26 L160 56 L90 56 Z M170 26 L214 26 L236 56 L170 56 Z" fill="#CFE6EE"/>
+<rect x="146" y="64" width="18" height="14" rx="3" fill="#C9A227"/>
+<circle cx="76" cy="96" r="24" fill="#1B1A17"/><circle cx="76" cy="96" r="9" fill="#B9B4A8"/>
+<circle cx="232" cy="96" r="24" fill="#1B1A17"/><circle cx="232" cy="96" r="9" fill="#B9B4A8"/></g></svg>
+<svg class="st reliant" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="5" stroke-linejoin="round">
+<path d="M16 98 L20 62 Q22 50 38 48 L92 46 L124 18 L206 18 Q218 18 228 30 L262 62 Q286 66 286 98 Z" fill="#8FC3E6"/>
+<path d="M130 28 L166 28 L166 52 L106 52 Z M176 28 L206 28 L230 54 L176 54 Z" fill="#EAF5FB"/>
+<path d="M262 74 L284 76" fill="none"/><rect x="24" y="66" width="20" height="10" rx="3" fill="#F2D06B"/>
+<circle cx="72" cy="100" r="22" fill="#1B1A17"/><circle cx="72" cy="100" r="8" fill="#B9B4A8"/>
+<circle cx="240" cy="104" r="16" fill="#1B1A17"/><circle cx="240" cy="104" r="6" fill="#B9B4A8"/></g></svg>
+<div class="photo"><span class="tape"></span><div></div><p>Năm anh em, một Mr. Bean</p></div>
+<div class="hud"><div><p>Tổng chi cả chuyến</p><b>51.565.135</b></div><div><p>Mỗi người</p><b>10.313.027</b></div><div><p>Cần chuyển</p><b>4 lần</b></div></div>
+</section>
+
+<!-- 2 TIMELINE -->
+<section class="slide s2"><svg class="st reliant" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="5" stroke-linejoin="round">
+<path d="M16 98 L20 62 Q22 50 38 48 L92 46 L124 18 L206 18 Q218 18 228 30 L262 62 Q286 66 286 98 Z" fill="#8FC3E6"/>
+<path d="M130 28 L166 28 L166 52 L106 52 Z M176 28 L206 28 L230 54 L176 54 Z" fill="#EAF5FB"/>
+<path d="M262 74 L284 76" fill="none"/><rect x="24" y="66" width="20" height="10" rx="3" fill="#F2D06B"/>
+<circle cx="72" cy="100" r="22" fill="#1B1A17"/><circle cx="72" cy="100" r="8" fill="#B9B4A8"/>
+<circle cx="240" cy="104" r="16" fill="#1B1A17"/><circle cx="240" cy="104" r="6" fill="#B9B4A8"/></g></svg><span class="kick">Nhật ký hành trình</span>
+<h2 style="margin-top:22px;max-width:1000px">Đi đâu, chi gì, cộng dồn tới đâu</h2>
+<div class="legend"><b style="color:#1B1A17">Đặt trước 20,9tr</b> = vé bay 10,5tr + The Shells 9,1tr + hành lý 1,2tr<br><s></s>Đường xanh: tổng tiền cộng dồn<br><i></i>Chấm xanh: chặng tốn từ 1,5 triệu trở lên</div>
+<svg viewBox="0 0 1680 700" width="1680" height="700" class="tl"><rect x="112" y="0" width="76" height="700" fill="#EFE4CC"/><text x="150" y="686" class="band">Trước</text><rect x="188" y="0" width="687" height="700" fill="#F6EEDC"/><text x="532" y="686" class="band">T6 · 23/10</text><rect x="875" y="0" width="382" height="700" fill="#EFE4CC"/><text x="1066" y="686" class="band">T7 · 24/10</text><rect x="1257" y="0" width="382" height="700" fill="#F6EEDC"/><text x="1447" y="686" class="band">CN · 25/10</text><line x1="60" x2="1600" y1="302" y2="302" class="grid"/><text x="104" y="308" class="ax">10tr</text><line x1="60" x2="1600" y1="244" y2="244" class="grid"/><text x="104" y="250" class="ax">20tr</text><line x1="60" x2="1600" y1="185" y2="185" class="grid"/><text x="104" y="191" class="ax">30tr</text><line x1="60" x2="1600" y1="127" y2="127" class="grid"/><text x="104" y="133" class="ax">40tr</text><line x1="60" x2="1600" y1="69" y2="69" class="grid"/><text x="104" y="75" class="ax">50tr</text><path d="M60,360 L150.0,360.0 L150.0,238.7 L226.3,238.7 L226.3,238.5 L302.6,238.5 L302.6,236.0 L378.9,236.0 L378.9,232.8 L455.3,232.8 L455.3,226.9 L531.6,226.9 L531.6,215.8 L607.9,215.8 L607.9,211.4 L684.2,211.4 L684.2,184.3 L760.5,184.3 L760.5,175.2 L836.8,175.2 L836.8,174.4 L913.2,174.4 L913.2,173.6 L989.5,173.6 L989.5,167.7 L1065.8,167.7 L1065.8,161.3 L1142.1,161.3 L1142.1,126.4 L1218.4,126.4 L1218.4,117.7 L1294.7,117.7 L1294.7,110.5 L1371.1,110.5 L1371.1,82.0 L1447.4,82.0 L1447.4,71.0 L1523.7,71.0 L1523.7,64.2 L1600.0,64.2 L1600.0,60.0 L1620,60.0 L1620,360 Z" class="area"/><path d="M60,360 L150.0,360.0 L150.0,238.7 L226.3,238.7 L226.3,238.5 L302.6,238.5 L302.6,236.0 L378.9,236.0 L378.9,232.8 L455.3,232.8 L455.3,226.9 L531.6,226.9 L531.6,215.8 L607.9,215.8 L607.9,211.4 L684.2,211.4 L684.2,184.3 L760.5,184.3 L760.5,175.2 L836.8,175.2 L836.8,174.4 L913.2,174.4 L913.2,173.6 L989.5,173.6 L989.5,167.7 L1065.8,167.7 L1065.8,161.3 L1142.1,161.3 L1142.1,126.4 L1218.4,126.4 L1218.4,117.7 L1294.7,117.7 L1294.7,110.5 L1371.1,110.5 L1371.1,82.0 L1447.4,82.0 L1447.4,71.0 L1523.7,71.0 L1523.7,64.2 L1600.0,64.2 L1600.0,60.0 L1620,60.0" class="step"/><line x1="0" x2="1680" y1="388" y2="388" class="road"/><line x1="0" x2="1680" y1="388" y2="388" class="roadmark"/><circle cx="150.0" cy="388" r="13" class="dot big"/><line x1="150.0" x2="150.0" y1="402" y2="412" class="tick"/><text x="150.0" y="438" class="lt">Trước chuyến</text><text x="150.0" y="466" class="lp">Đặt trước</text><text x="150.0" y="496" class="lv hot">20,9tr</text><circle cx="226.3" cy="388" r="9" class="dot"/><line x1="226.3" x2="226.3" y1="402" y2="524" class="tick"/><text x="226.3" y="550" class="lt">06:30</text><text x="226.3" y="578" class="lp">Ministop SGN</text><text x="226.3" y="608" class="lv">28k</text><circle cx="302.6" cy="388" r="9" class="dot"/><line x1="302.6" x2="302.6" y1="402" y2="412" class="tick"/><text x="302.6" y="438" class="lt">09:00</text><text x="302.6" y="466" class="lp">Xe về Ông Lang</text><text x="302.6" y="496" class="lv">440k</text><circle cx="378.9" cy="388" r="9" class="dot"/><line x1="378.9" x2="378.9" y1="402" y2="524" class="tick"/><text x="378.9" y="550" class="lt">09:20</text><text x="378.9" y="578" class="lp">Bún quậy</text><text x="378.9" y="608" class="lv">548k</text><circle cx="455.3" cy="388" r="9" class="dot"/><line x1="455.3" x2="455.3" y1="402" y2="412" class="tick"/><text x="455.3" y="438" class="lt">10:00</text><text x="455.3" y="466" class="lp">Brunch Là Men</text><text x="455.3" y="496" class="lv">1,0tr</text><circle cx="531.6" cy="388" r="13" class="dot big"/><line x1="531.6" x2="531.6" y1="402" y2="524" class="tick"/><text x="531.6" y="550" class="lt">10:15</text><text x="531.6" y="578" class="lp">Nhận phòng</text><text x="531.6" y="608" class="lv hot">1,9tr</text><circle cx="607.9" cy="388" r="9" class="dot"/><line x1="607.9" x2="607.9" y1="402" y2="412" class="tick"/><text x="607.9" y="438" class="lt">16:00</text><text x="607.9" y="466" class="lp">Cơm 68 + kem</text><text x="607.9" y="496" class="lv">758k</text><circle cx="684.2" cy="388" r="13" class="dot big"/><line x1="684.2" x2="684.2" y1="402" y2="524" class="tick"/><text x="684.2" y="550" class="lt">18:55</text><text x="684.2" y="578" class="lp">Mai Hương</text><text x="684.2" y="608" class="lv hot">4,7tr</text><circle cx="760.5" cy="388" r="13" class="dot big"/><line x1="760.5" x2="760.5" y1="402" y2="412" class="tick"/><text x="760.5" y="438" class="lt">20:15</text><text x="760.5" y="466" class="lp">Tinh Hoa + bắp</text><text x="760.5" y="496" class="lv hot">1,6tr</text><circle cx="836.8" cy="388" r="9" class="dot"/><line x1="836.8" x2="836.8" y1="402" y2="524" class="tick"/><text x="836.8" y="550" class="lt">22:30</text><text x="836.8" y="578" class="lp">Ghé My Mart</text><text x="836.8" y="608" class="lv">138k</text><circle cx="913.2" cy="388" r="9" class="dot"/><line x1="913.2" x2="913.2" y1="402" y2="412" class="tick"/><text x="913.2" y="438" class="lt">10:45</text><text x="913.2" y="466" class="lp">Chuồn Chuồn</text><text x="913.2" y="496" class="lv">150k</text><circle cx="989.5" cy="388" r="9" class="dot"/><line x1="989.5" x2="989.5" y1="402" y2="524" class="tick"/><text x="989.5" y="550" class="lt">13:10</text><text x="989.5" y="578" class="lp">Xe đi Nam đảo</text><text x="989.5" y="608" class="lv">1,0tr</text><circle cx="1065.8" cy="388" r="9" class="dot"/><line x1="1065.8" x2="1065.8" y1="402" y2="412" class="tick"/><text x="1065.8" y="438" class="lt">15:25</text><text x="1065.8" y="466" class="lp">Sunset Town</text><text x="1065.8" y="496" class="lv">1,1tr</text><circle cx="1142.1" cy="388" r="13" class="dot big"/><line x1="1142.1" x2="1142.1" y1="402" y2="524" class="tick"/><text x="1142.1" y="550" class="lt">18:15</text><text x="1142.1" y="578" class="lp">Sun Bavaria</text><text x="1142.1" y="608" class="lv hot">6,0tr</text><circle cx="1218.4" cy="388" r="13" class="dot big"/><line x1="1218.4" x2="1218.4" y1="402" y2="412" class="tick"/><text x="1218.4" y="438" class="lt">22:45</text><text x="1218.4" y="466" class="lp">OCSEN bar</text><text x="1218.4" y="496" class="lv hot">1,5tr</text><circle cx="1294.7" cy="388" r="9" class="dot"/><line x1="1294.7" x2="1294.7" y1="402" y2="524" class="tick"/><text x="1294.7" y="550" class="lt">10:15</text><text x="1294.7" y="578" class="lp">Brunch Ann Cafe</text><text x="1294.7" y="608" class="lv">1,2tr</text><circle cx="1371.1" cy="388" r="13" class="dot big"/><line x1="1371.1" x2="1371.1" y1="402" y2="412" class="tick"/><text x="1371.1" y="438" class="lt">11:50</text><text x="1371.1" y="466" class="lp">Safari</text><text x="1371.1" y="496" class="lv hot">4,9tr</text><circle cx="1447.4" cy="388" r="13" class="dot big"/><line x1="1447.4" x2="1447.4" y1="402" y2="524" class="tick"/><text x="1447.4" y="550" class="lt">16:40</text><text x="1447.4" y="578" class="lp">Pizza</text><text x="1447.4" y="608" class="lv hot">1,9tr</text><circle cx="1523.7" cy="388" r="9" class="dot"/><line x1="1523.7" x2="1523.7" y1="402" y2="412" class="tick"/><text x="1523.7" y="438" class="lt">18:00</text><text x="1523.7" y="466" class="lp">Taxi ra sân bay</text><text x="1523.7" y="496" class="lv">1,2tr</text><circle cx="1600.0" cy="388" r="9" class="dot"/><line x1="1600.0" x2="1600.0" y1="402" y2="524" class="tick"/><text x="1600.0" y="550" class="lt">18:15</text><text x="1600.0" y="578" class="lp">Quầy Vietravel</text><text x="1600.0" y="608" class="lv">724k</text><rect x="88" y="187" width="124" height="38" rx="19" class="pill"/><text x="150" y="213" class="pt">20,9tr</text><rect x="775" y="122" width="124" height="38" rx="19" class="pill"/><text x="837" y="148" class="pt">31,9tr</text><rect x="1156" y="66" width="124" height="38" rx="19" class="pill"/><text x="1218" y="92" class="pt">41,7tr</text><rect x="1538" y="8" width="124" height="38" rx="19" class="pill"/><text x="1600" y="34" class="pt">51,6tr</text></svg>
+<div class="ep">Giờ lấy theo lịch trình, vài khoản taxi với quán thì xếp theo trí nhớ.</div><div class="pg">2 / 7</div></section>
+
+<!-- 3 CATEGORIES -->
+<section class="slide s3"><svg class="teddy" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="4"><circle cx="30" cy="26" r="16" fill="#9A6B43"/><circle cx="90" cy="26" r="16" fill="#9A6B43"/><circle cx="60" cy="56" r="38" fill="#9A6B43"/><ellipse cx="60" cy="70" rx="17" ry="13" fill="#D9B48A"/><ellipse cx="60" cy="112" rx="34" ry="18" fill="#9A6B43"/></g><circle cx="46" cy="50" r="5" fill="#1B1A17"/><circle cx="74" cy="50" r="5" fill="#1B1A17"/><ellipse cx="60" cy="64" rx="7" ry="5" fill="#1B1A17"/></svg><svg class="st reliant" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="5" stroke-linejoin="round">
+<path d="M16 98 L20 62 Q22 50 38 48 L92 46 L124 18 L206 18 Q218 18 228 30 L262 62 Q286 66 286 98 Z" fill="#8FC3E6"/>
+<path d="M130 28 L166 28 L166 52 L106 52 Z M176 28 L206 28 L230 54 L176 54 Z" fill="#EAF5FB"/>
+<path d="M262 74 L284 76" fill="none"/><rect x="24" y="66" width="20" height="10" rx="3" fill="#F2D06B"/>
+<circle cx="72" cy="100" r="22" fill="#1B1A17"/><circle cx="72" cy="100" r="8" fill="#B9B4A8"/>
+<circle cx="240" cy="104" r="16" fill="#1B1A17"/><circle cx="240" cy="104" r="6" fill="#B9B4A8"/></g></svg><span class="kick">Tiền đi đâu</span>
+<h2 style="margin-top:22px;max-width:1440px">4 nhóm lớn ngang ngửa, chiếm 93% tổng chi</h2>
+<div class="cchart"><div class="crow"><div class="clab">Bay & hành lý</div><div class="ctrack"><div class="cbar big" style="--w:100.0%"></div></div><div class="cval"><b>12.432.884</b><span>24% · 2.486.577 mỗi người</span></div></div><div class="crow"><div class="clab">Ăn uống</div><div class="ctrack"><div class="cbar big" style="--w:99.6%"></div></div><div class="cval"><b>12.377.525</b><span>24% · 2.475.505 mỗi người</span></div></div><div class="crow"><div class="clab">Vui chơi</div><div class="ctrack"><div class="cbar big" style="--w:98.5%"></div></div><div class="cval"><b>12.250.000</b><span>24% · 2.450.000 mỗi người</span></div></div><div class="crow"><div class="clab">Khách sạn</div><div class="ctrack"><div class="cbar big" style="--w:88.8%"></div></div><div class="cval"><b>11.042.626</b><span>21% · 2.208.525 mỗi người</span></div></div><div class="crow"><div class="clab">Di chuyển</div><div class="ctrack"><div class="cbar" style="--w:23.0%"></div></div><div class="cval"><b>2.856.100</b><span>6% · 571.220 mỗi người</span></div></div><div class="crow"><div class="clab">Mua sắm</div><div class="ctrack"><div class="cbar" style="--w:4.9%"></div></div><div class="cval"><b>606.000</b><span>1% · 121.200 mỗi người</span></div></div></div>
+<div class="ep">Tổng 51.565.135đ · 32 khoản</div><div class="pg">3 / 7</div></section>
+
+<!-- 4 WHO PAID -->
+<section class="slide s4" style="--h:137px"><svg class="st mrb" viewBox="0 0 170 270" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<rect x="54" y="192" width="24" height="60" fill="#3A3633"/><rect x="90" y="192" width="24" height="60" fill="#3A3633"/>
+<ellipse cx="62" cy="256" rx="20" ry="8" fill="#1B1A17"/><ellipse cx="106" cy="256" rx="20" ry="8" fill="#1B1A17"/>
+<path d="M44 124 L28 184" stroke-width="18"/><path d="M44 124 L28 184" stroke="#7A5A3C" stroke-width="11"/>
+<path d="M126 122 L154 72" stroke-width="18"/><path d="M126 122 L154 72" stroke="#7A5A3C" stroke-width="11"/>
+<circle cx="27" cy="190" r="9" fill="#F1C9A5"/><circle cx="157" cy="64" r="10" fill="#F1C9A5"/>
+<path d="M40 116 Q84 104 128 116 L134 198 L34 198 Z" fill="#7A5A3C"/>
+<path d="M70 110 L84 146 L98 110 Z" fill="#FFFFFF"/>
+<path d="M81 116 L87 116 L86 156 L84 162 L82 156 Z" fill="#C0392B"/>
+<rect x="76" y="94" width="16" height="16" fill="#F1C9A5"/>
+<ellipse cx="84" cy="60" rx="31" ry="39" fill="#F1C9A5"/>
+<path d="M53 54 Q50 18 84 18 Q118 18 115 54 Q104 34 76 38 Q60 40 53 54 Z" fill="#3B2A1E"/>
+<path d="M62 46 Q68 38 75 46 M93 46 Q99 38 106 46" fill="none"/>
+<circle cx="69" cy="58" r="3.5" fill="#1B1A17"/><circle cx="99" cy="58" r="3.5" fill="#1B1A17"/>
+<path d="M84 58 Q92 72 82 74" fill="none"/><path d="M66 84 Q84 96 102 84" fill="none"/></g></svg><span class="kick">Ai đã ứng</span>
+<h2 style="margin-top:22px;max-width:1300px">Mr. Bean một mình ứng 69% cả chuyến</h2>
+<div class="cols"><div class="col bean"><div class="cv">35.406.630</div><div class="cb" style="height:470px"><svg class="tie" viewBox="0 0 40 90"><path d="M12 2 H28 L24 14 L32 70 L20 88 L8 70 L16 14 Z" fill="#C0392B" stroke="#1B1A17" stroke-width="3"/></svg></div><div class="ft"><div class="cn">Huy Bean</div><div class="cr">a.k.a. Mr. Bean</div><div class="cs"><span class="pos">nhận lại 25.093.603</span></div></div></div><div class="col"><div class="cv">14.180.505</div><div class="cb" style="height:188px"></div><div class="ft"><div class="cn">Thái Bo</div><div class="cr">&nbsp;</div><div class="cs"><span class="pos">nhận lại 3.867.478</span></div></div></div><div class="col"><div class="cv">1.000.000</div><div class="cb" style="height:13px"></div><div class="ft"><div class="cn">Đại Du</div><div class="cr">&nbsp;</div><div class="cs"><span class="neg">cần trả 9.313.027</span></div></div></div><div class="col"><div class="cv">978.000</div><div class="cb" style="height:13px"></div><div class="ft"><div class="cn">Đạt nhỏ</div><div class="cr">&nbsp;</div><div class="cs"><span class="neg">cần trả 9.335.027</span></div></div></div><div class="col"><div class="cv">0</div><div class="cb" style="height:4px"></div><div class="ft"><div class="cn">Thâu Skyler</div><div class="cr">&nbsp;</div><div class="cs"><span class="neg">cần trả 10.313.027</span></div></div></div></div>
+<div class="share"><span>phần mỗi người 10.313.027</span></div>
+<div class="pg">4 / 7</div></section>
+
+<!-- 5 CHEQUES -->
+<section class="slide s5"><svg class="st mini2" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="5" stroke-linejoin="round">
+<path d="M18 92 Q14 62 40 58 L78 56 L104 22 Q110 16 122 16 L206 16 Q218 16 224 24 L250 56 L276 60 Q292 64 290 92 Z" fill="#A9C24B"/>
+<path d="M226 26 L250 56 L276 60 Q292 64 290 92 L238 92 L238 28 Z" fill="#1B1A17"/>
+<path d="M112 26 L160 26 L160 56 L90 56 Z M170 26 L214 26 L236 56 L170 56 Z" fill="#CFE6EE"/>
+<rect x="146" y="64" width="18" height="14" rx="3" fill="#C9A227"/>
+<circle cx="76" cy="96" r="24" fill="#1B1A17"/><circle cx="76" cy="96" r="9" fill="#B9B4A8"/>
+<circle cx="232" cy="96" r="24" fill="#1B1A17"/><circle cx="232" cy="96" r="9" fill="#B9B4A8"/></g></svg><span class="kick">Trả tiền cho Mr. Bean</span>
+<h2 style="margin-top:22px">Ký 4 tấm séc là xong, mỗi người đúng 10.313.027đ</h2>
+<div class="cqs"><div class="cq"><div class="cqh"><span class="bank">NGÂN HÀNG BEAN</span><span class="br">Chi nhánh Phú Quốc · Séc số 001</span><span class="dt">Ngày 29/10/2026</span></div>
+<div class="cqpay">Trả cho <span class="hand">Huy Bean</span></div>
+<div class="cqw">Số tiền bằng chữ: <span class="hand sm">Mười triệu ba trăm mười ba nghìn không trăm hai mươi bảy đồng</span></div>
+<div class="cqf"><div class="amt">₫ 10.313.027</div><div class="sig"><span class="hand">Thâu Skyler</span><i>Chữ ký người trả</i></div></div></div><div class="cq"><div class="cqh"><span class="bank">NGÂN HÀNG BEAN</span><span class="br">Chi nhánh Phú Quốc · Séc số 002</span><span class="dt">Ngày 29/10/2026</span></div>
+<div class="cqpay">Trả cho <span class="hand">Huy Bean</span></div>
+<div class="cqw">Số tiền bằng chữ: <span class="hand sm">Chín triệu ba trăm ba mươi lăm nghìn không trăm hai mươi bảy đồng</span></div>
+<div class="cqf"><div class="amt">₫ 9.335.027</div><div class="sig"><span class="hand">Đạt nhỏ</span><i>Chữ ký người trả</i></div></div></div><div class="cq"><div class="cqh"><span class="bank">NGÂN HÀNG BEAN</span><span class="br">Chi nhánh Phú Quốc · Séc số 003</span><span class="dt">Ngày 29/10/2026</span></div>
+<div class="cqpay">Trả cho <span class="hand">Huy Bean</span></div>
+<div class="cqw">Số tiền bằng chữ: <span class="hand sm">Năm triệu bốn trăm bốn mươi lăm nghìn năm trăm bốn mươi chín đồng</span></div>
+<div class="cqf"><div class="amt">₫ 5.445.549</div><div class="sig"><span class="hand">Đại Du</span><i>Chữ ký người trả</i></div></div></div><div class="cq"><div class="cqh"><span class="bank">NGÂN HÀNG BEAN</span><span class="br">Chi nhánh Phú Quốc · Séc số 004</span><span class="dt">Ngày 29/10/2026</span></div>
+<div class="cqpay">Trả cho <span class="hand">Thái Bo</span></div>
+<div class="cqw">Số tiền bằng chữ: <span class="hand sm">Ba triệu tám trăm sáu mươi bảy nghìn bốn trăm bảy mươi tám đồng</span></div>
+<div class="cqf"><div class="amt">₫ 3.867.478</div><div class="sig"><span class="hand">Đại Du</span><i>Chữ ký người trả</i></div></div></div></div>
+<div class="pg">5 / 7</div></section>
+
+<!-- 6 LEDGER -->
+<section class="slide s6"><svg class="st ted2" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="4"><circle cx="30" cy="26" r="16" fill="#9A6B43"/><circle cx="90" cy="26" r="16" fill="#9A6B43"/><circle cx="60" cy="56" r="38" fill="#9A6B43"/><ellipse cx="60" cy="70" rx="17" ry="13" fill="#D9B48A"/><ellipse cx="60" cy="112" rx="34" ry="18" fill="#9A6B43"/></g><circle cx="46" cy="50" r="5" fill="#1B1A17"/><circle cx="74" cy="50" r="5" fill="#1B1A17"/><ellipse cx="60" cy="64" rx="7" ry="5" fill="#1B1A17"/></svg><svg class="st mini2" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="5" stroke-linejoin="round">
+<path d="M18 92 Q14 62 40 58 L78 56 L104 22 Q110 16 122 16 L206 16 Q218 16 224 24 L250 56 L276 60 Q292 64 290 92 Z" fill="#A9C24B"/>
+<path d="M226 26 L250 56 L276 60 Q292 64 290 92 L238 92 L238 28 Z" fill="#1B1A17"/>
+<path d="M112 26 L160 26 L160 56 L90 56 Z M170 26 L214 26 L236 56 L170 56 Z" fill="#CFE6EE"/>
+<rect x="146" y="64" width="18" height="14" rx="3" fill="#C9A227"/>
+<circle cx="76" cy="96" r="24" fill="#1B1A17"/><circle cx="76" cy="96" r="9" fill="#B9B4A8"/>
+<circle cx="232" cy="96" r="24" fill="#1B1A17"/><circle cx="232" cy="96" r="9" fill="#B9B4A8"/></g></svg><svg class="st reliant" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="5" stroke-linejoin="round">
+<path d="M16 98 L20 62 Q22 50 38 48 L92 46 L124 18 L206 18 Q218 18 228 30 L262 62 Q286 66 286 98 Z" fill="#8FC3E6"/>
+<path d="M130 28 L166 28 L166 52 L106 52 Z M176 28 L206 28 L230 54 L176 54 Z" fill="#EAF5FB"/>
+<path d="M262 74 L284 76" fill="none"/><rect x="24" y="66" width="20" height="10" rx="3" fill="#F2D06B"/>
+<circle cx="72" cy="100" r="22" fill="#1B1A17"/><circle cx="72" cy="100" r="8" fill="#B9B4A8"/>
+<circle cx="240" cy="104" r="16" fill="#1B1A17"/><circle cx="240" cy="104" r="6" fill="#B9B4A8"/></g></svg><span class="kick">Hóa đơn chi tiết</span>
+<h2 style="margin-top:22px;font-size:54px">Từng khoản, theo người ứng</h2>
+<div class="ledger"><div class="lg"><h4>Huy Bean<span>35.406.630</span></h4><table><tr><td>Vé máy bay khứ hồi (5 người)</td><td>10.495.038</td></tr><tr><td>The Shells Resort, 2 đêm (Agoda)</td><td>9.142.626</td></tr><tr><td>Hành lý ký gửi lượt đi</td><td>763.246</td></tr><tr><td>Sun Bavaria</td><td>5.000.000</td></tr><tr><td>Quán Là Men</td><td>1.008.720</td></tr><tr><td>Taxi 7 chỗ</td><td>440.000</td></tr><tr><td>Taxi lên Chuồn Chuồn</td><td>150.000</td></tr><tr><td>Cơm miền Tây 68</td><td>558.000</td></tr><tr><td>Taxi anh guộc</td><td>1.000.000</td></tr><tr><td>Vé Safari</td><td>4.750.000</td></tr><tr><td>Taxi ngày cuối</td><td>1.000.000</td></tr><tr><td>Hành lý lượt về (mua trước)</td><td>451.000</td></tr><tr><td>Hành lý thêm lượt về (tại quầy)</td><td>648.000</td></tr></table></div><div class="lg"><h4>Thái Bo<span>14.180.505</span></h4><table><tr><td>Ministop sân bay SGN</td><td>28.000</td></tr><tr><td>Phụ thu người thứ 5 tại resort</td><td>1.900.000</td></tr><tr><td>My Mart</td><td>138.000</td></tr><tr><td>Bắp rang Grand World</td><td>60.000</td></tr><tr><td>Vé show Tinh Hoa Việt Nam</td><td>1.500.000</td></tr><tr><td>Ăn tối Mai Hương</td><td>4.662.000</td></tr><tr><td>OCSEN bar Bãi Trường</td><td>1.496.200</td></tr><tr><td>Loca Souvenir</td><td>388.000</td></tr><tr><td>Baya Hospitality</td><td>645.000</td></tr><tr><td>Grab ra sân bay</td><td>176.100</td></tr><tr><td>Brunch Ann Cafe</td><td>1.225.000</td></tr><tr><td>The Home Pizza</td><td>1.886.605</td></tr><tr><td>Phí chọn ghế lượt về</td><td>75.600</td></tr></table></div><div><div class="lg"><h4>Đại Du<span>1.000.000</span></h4><table><tr><td>Nâng hàng ghế Sun Bavaria</td><td>1.000.000</td></tr></table></div><div class="lg"><h4>Đạt nhỏ<span>978.000</span></h4><table><tr><td>Taxi Kiến Xây</td><td>90.000</td></tr><tr><td>Bún quậy Kiến Xây</td><td>458.000</td></tr><tr><td>Kem + nước</td><td>200.000</td></tr><tr><td>Tạp hóa</td><td>80.000</td></tr><tr><td>Kem coi chim</td><td>150.000</td></tr></table></div><div class="lg"><h4>Thâu Skyler<span>0</span></h4><p class="note">Không ứng khoản nào. Bù lại: đạo diễn clip.</p></div></div></div>
+<div class="pg">6 / 7</div></section>
+
+<!-- 7 THE END -->
+<section class="slide end"><div class="stars"></div><svg class="st mrb" viewBox="0 0 170 270" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<rect x="54" y="192" width="24" height="60" fill="#3A3633"/><rect x="90" y="192" width="24" height="60" fill="#3A3633"/>
+<ellipse cx="62" cy="256" rx="20" ry="8" fill="#1B1A17"/><ellipse cx="106" cy="256" rx="20" ry="8" fill="#1B1A17"/>
+<path d="M44 124 L28 184" stroke-width="18"/><path d="M44 124 L28 184" stroke="#7A5A3C" stroke-width="11"/>
+<path d="M126 122 L154 72" stroke-width="18"/><path d="M126 122 L154 72" stroke="#7A5A3C" stroke-width="11"/>
+<circle cx="27" cy="190" r="9" fill="#F1C9A5"/><circle cx="157" cy="64" r="10" fill="#F1C9A5"/>
+<path d="M40 116 Q84 104 128 116 L134 198 L34 198 Z" fill="#7A5A3C"/>
+<path d="M70 110 L84 146 L98 110 Z" fill="#FFFFFF"/>
+<path d="M81 116 L87 116 L86 156 L84 162 L82 156 Z" fill="#C0392B"/>
+<rect x="76" y="94" width="16" height="16" fill="#F1C9A5"/>
+<ellipse cx="84" cy="60" rx="31" ry="39" fill="#F1C9A5"/>
+<path d="M53 54 Q50 18 84 18 Q118 18 115 54 Q104 34 76 38 Q60 40 53 54 Z" fill="#3B2A1E"/>
+<path d="M62 46 Q68 38 75 46 M93 46 Q99 38 106 46" fill="none"/>
+<circle cx="69" cy="58" r="3.5" fill="#1B1A17"/><circle cx="99" cy="58" r="3.5" fill="#1B1A17"/>
+<path d="M84 58 Q92 72 82 74" fill="none"/><path d="M66 84 Q84 96 102 84" fill="none"/></g></svg><svg class="st mini2" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="5" stroke-linejoin="round">
+<path d="M18 92 Q14 62 40 58 L78 56 L104 22 Q110 16 122 16 L206 16 Q218 16 224 24 L250 56 L276 60 Q292 64 290 92 Z" fill="#A9C24B"/>
+<path d="M226 26 L250 56 L276 60 Q292 64 290 92 L238 92 L238 28 Z" fill="#1B1A17"/>
+<path d="M112 26 L160 26 L160 56 L90 56 Z M170 26 L214 26 L236 56 L170 56 Z" fill="#CFE6EE"/>
+<rect x="146" y="64" width="18" height="14" rx="3" fill="#C9A227"/>
+<circle cx="76" cy="96" r="24" fill="#1B1A17"/><circle cx="76" cy="96" r="9" fill="#B9B4A8"/>
+<circle cx="232" cy="96" r="24" fill="#1B1A17"/><circle cx="232" cy="96" r="9" fill="#B9B4A8"/></g></svg>
+<h1 class="rise">The End</h1><div class="tag">Hết tiền, hết tập. Hẹn Mr. Bean ở chuyến sau.</div>
+<div class="album"><div class="pol"><div style="background-image:url(img/g_dinner.jpg)"></div><p>Mỗi hành trình là một kỉ niệm</p></div><div class="pol"><div style="background-image:url(img/g_arch.jpg);background-position:center 70%"></div><p>Những người bạn lâu năm</p></div><div class="pol"><div style="background-image:url(img/g_safari.jpg)"></div><p>Hẹn ngày tái ngộ</p></div></div>
+<div class="clip">Xem clip chuyến đi (Thâu Skyler đạo diễn): <a href="https://www.youtube.com/watch?v=BxCrPEv0mcE">youtube.com/watch?v=BxCrPEv0mcE</a></div>
+</section>
+
+</div></div>
+<script>
+/* === SCALE + NAV === */
+const st=document.querySelector('.deck-stage'),S=[...document.querySelectorAll('.slide')];let i=0;
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform=`translate(${(innerWidth-1920*s)/2}px,${(innerHeight-1080*s)/2}px) scale(${s})`}
+function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,j)=>s.classList.toggle('active',j===i))}
+addEventListener('resize',fit);fit();
+addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key))go(i+1);if(['ArrowLeft','PageUp'].includes(e.key))go(i-1)});
+addEventListener('click',e=>{if(e.target.closest('a'))return;go(e.clientX>innerWidth/2?i+1:i-1)});
+</script></body></html>
