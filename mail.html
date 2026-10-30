@@ -86,6 +86,5 @@ window.onYouTubeIframeAPIReady=()=>{pl=new YT.Player('bgmPl',{width:200,height:2
   onError:()=>{if(++k<IDS.length){pl.loadVideoById(IDS[k]);if(!want)pl.pauseVideo()}}}})};
 const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s);
 btn.addEventListener('click',()=>{want=!want;set(want);if(!ready)return;if(want){pl.unMute();pl.setVolume(80);pl.playVideo()}else pl.pauseVideo()});
-["pointerdown","touchstart"].forEach(e=>btn.addEventListener(e,()=>{if(ready&&!want){pl.unMute()}}));})();
 </script>
 </body></html>
