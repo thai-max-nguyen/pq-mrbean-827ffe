@@ -423,4 +423,19 @@ function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,j)=>s.classList
 addEventListener('resize',fit);fit();
 addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key))go(i+1);if(['ArrowLeft','PageUp'].includes(e.key))go(i-1)});
 addEventListener('click',e=>{if(e.target.closest('a'))return;go(e.clientX>innerWidth/2?i+1:i-1)});
-</script></body></html>
+</script><!-- === NHẠC NỀN (YouTube nhúng, chỉ phát khi bấm) === -->
+<style>
+#bgm{position:fixed;left:18px;bottom:18px;z-index:9999;font-family:'Grandstander','Trebuchet MS',sans-serif}
+#bgm button{background:#A9C24B;color:#1B1A17;border:3px solid #1B1A17;border-radius:30px;padding:10px 20px;font:700 17px 'Grandstander','Trebuchet MS',sans-serif;cursor:pointer;box-shadow:0 4px 0 #1B1A17}
+#bgm button:active{transform:translateY(3px);box-shadow:0 1px 0 #1B1A17}
+#bgm .pl{margin-top:10px;width:240px;height:135px;border:3px solid #1B1A17;border-radius:8px;overflow:hidden;background:#000;display:none}
+#bgm.on .pl{display:block}
+@media print{#bgm{display:none}}
+</style>
+<div id="bgm"><div class="pl"></div><button type="button">♪ Nhạc nền</button></div>
+<script>
+(()=>{const b=document.getElementById('bgm'),btn=b.querySelector('button'),pl=b.querySelector('.pl'),V='4QPMf72Zka0';
+['click','mousedown','touchstart','keydown','pointerdown'].forEach(e=>b.addEventListener(e,ev=>ev.stopPropagation()));
+btn.addEventListener('click',()=>{if(b.classList.toggle('on')){pl.innerHTML='<iframe width="240" height="135" src="https://www.youtube.com/embed/'+V+'?autoplay=1&loop=1&playlist='+V+'" title="Ecce Homo (Theme from Mr Bean)" allow="autoplay; encrypted-media" allowfullscreen style="border:0"></iframe>';btn.textContent='■ Tắt nhạc'}else{pl.innerHTML='';btn.textContent='♪ Nhạc nền'}});})();
+</script>
+</body></html>

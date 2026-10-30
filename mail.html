@@ -63,4 +63,19 @@ Ba ngày, năm thằng, một Mr. Bean. Gửi mail này để lưu lại chuyế
 Chi tiết từng khoản với lịch trình theo giờ thì mở deck hoặc tải PDF ở đây nha:<br>
 <a href="https://thai-max-nguyen.github.io/pq-mrbean-827ffe/" style="display:inline-block;margin:10px 8px 10px 0;background:#0F1526;color:#F6EEDC;font-family:'Grandstander','Trebuchet MS',Arial,sans-serif;font-size:15px;font-weight:700;text-decoration:none;padding:10px 20px;border-radius:24px">Mở deck online</a><a href="https://thai-max-nguyen.github.io/pq-mrbean-827ffe/phu-quoc-chia-tien.pdf" style="display:inline-block;margin:10px 0;background:#fff;color:#1B1A17;border:2px solid #1B1A17;font-family:'Grandstander','Trebuchet MS',Arial,sans-serif;font-size:15px;font-weight:700;text-decoration:none;padding:8px 18px;border-radius:24px">Tải PDF</a><br>Thái Bo
 </td></tr>
-</table></td></tr></table></body></html>
+</table></td></tr></table><!-- === NHẠC NỀN (YouTube nhúng, chỉ phát khi bấm) === -->
+<style>
+#bgm{position:fixed;left:18px;bottom:18px;z-index:9999;font-family:'Grandstander','Trebuchet MS',sans-serif}
+#bgm button{background:#A9C24B;color:#1B1A17;border:3px solid #1B1A17;border-radius:30px;padding:10px 20px;font:700 17px 'Grandstander','Trebuchet MS',sans-serif;cursor:pointer;box-shadow:0 4px 0 #1B1A17}
+#bgm button:active{transform:translateY(3px);box-shadow:0 1px 0 #1B1A17}
+#bgm .pl{margin-top:10px;width:240px;height:135px;border:3px solid #1B1A17;border-radius:8px;overflow:hidden;background:#000;display:none}
+#bgm.on .pl{display:block}
+@media print{#bgm{display:none}}
+</style>
+<div id="bgm"><div class="pl"></div><button type="button">♪ Nhạc nền</button></div>
+<script>
+(()=>{const b=document.getElementById('bgm'),btn=b.querySelector('button'),pl=b.querySelector('.pl'),V='4QPMf72Zka0';
+['click','mousedown','touchstart','keydown','pointerdown'].forEach(e=>b.addEventListener(e,ev=>ev.stopPropagation()));
+btn.addEventListener('click',()=>{if(b.classList.toggle('on')){pl.innerHTML='<iframe width="240" height="135" src="https://www.youtube.com/embed/'+V+'?autoplay=1&loop=1&playlist='+V+'" title="Ecce Homo (Theme from Mr Bean)" allow="autoplay; encrypted-media" allowfullscreen style="border:0"></iframe>';btn.textContent='■ Tắt nhạc'}else{pl.innerHTML='';btn.textContent='♪ Nhạc nền'}});})();
+</script>
+</body></html>
