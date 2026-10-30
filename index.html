@@ -254,6 +254,36 @@ h2{font-size:66px;font-weight:800;line-height:1.05}
 .pol:nth-child(1){transform:rotate(-5deg)} .pol:nth-child(2){transform:rotate(2deg) translateY(-30px)} .pol:nth-child(3){transform:rotate(-2deg)}
 .clip{position:absolute;left:0;right:0;bottom:40px;text-align:center;font:700 22px 'Nunito';color:#E8D9B5}
 .clip a{color:var(--mini)}
+/* === AFTER-CREDIT: Huy diễn Mr. Bean (clip lặp) === */
+.post{background:var(--night);color:var(--paper)}
+.post .ph{position:absolute;left:0;right:0;top:56px;text-align:center}
+.post .kick{background:var(--mini);color:var(--ink);font-size:24px}
+.post h2{font:900 96px/1.15 'Grandstander';color:#FFF6E2;margin:14px 0 0}
+.tv{position:absolute;left:50%;top:320px;transform:translateX(-50%) rotate(-1.5deg);width:1040px;padding:34px 34px 70px;background:#7A5A3C;border:6px solid #1B1A17;border-radius:44px;box-shadow:0 30px 60px rgba(0,0,0,.55)}
+.tv video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:26px;border:5px solid #1B1A17;background:#000}
+.tv .knob{position:absolute;bottom:18px;width:34px;height:34px;border-radius:50%;background:#E8D9B5;border:4px solid #1B1A17}
+.tv .k1{right:60px}.tv .k2{right:110px}
+.tv .cap{position:absolute;left:44px;bottom:18px;font:28px 'Patrick Hand';color:#FFF6E2}
+.post .mrb{left:140px;top:420px;width:170px}
+.post .ph{opacity:0}
+.slide.active.post .ph{animation:postIn .8s cubic-bezier(.2,.8,.2,1) 4.2s both}
+@keyframes postIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+.drop{position:absolute;left:0;right:0;top:0;height:1080px;pointer-events:none}
+.drop .tv{pointer-events:auto}
+.ufo{position:absolute;left:50%;top:40px;width:420px;margin-left:-210px;z-index:4;opacity:0}
+.beam{position:absolute;left:50%;top:150px;width:1200px;height:880px;margin-left:-600px;clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);background:linear-gradient(#FFF6C8cc,#FFF6C810);opacity:0;z-index:1}
+.slide.active .ufo{animation:ufo 4.8s cubic-bezier(.4,.1,.3,1) both}
+.slide.active .beam{animation:beam 4.8s ease both}
+.slide.active .drop{animation:drop 4.8s both}
+.slide.active .tv{animation:dance .9s ease-in-out 3.4s infinite}
+.tv{transform-origin:50% 100%}
+@keyframes ufo{0%{opacity:1;transform:translateX(-1300px) rotate(-8deg)}20%{opacity:1;transform:translateX(0) rotate(4deg)}26%,66%{opacity:1;transform:translateX(0) rotate(0) translateY(0)}46%{transform:translateY(-10px)}100%{opacity:1;transform:translateX(1400px) translateY(-120px) rotate(10deg)}}
+@keyframes beam{0%,22%{opacity:0}28%,62%{opacity:1}72%,100%{opacity:0}}
+@keyframes drop{0%,26%{transform:translateY(-560px) scale(.15);opacity:0}30%{opacity:1}58%{transform:translateY(0) scale(1)}63%{transform:translateY(-40px) scale(1.02,.97)}68%{transform:translateY(0) scale(1)}100%{transform:none;opacity:1}}
+@keyframes dance{0%,100%{transform:translateX(-50%) rotate(-3deg)}25%{transform:translateX(-50%) translateY(-22px)}50%{transform:translateX(-50%) rotate(3deg)}75%{transform:translateX(-50%) translateY(-22px)}}
+@media print{.ufo,.beam{display:none}.post .ph{opacity:1}.drop,.tv{animation:none!important}}
+
+.post .reliant{right:120px;bottom:60px;width:150px}
 /* === STICKERS (Bean, Mini, xe xanh, gấu) === */
 .st{position:absolute;z-index:3}
 .cover .reliant{left:790px;bottom:100px;width:195px;transform:scaleX(-1);animation:drive 6s ease-in-out .4s infinite alternate}
@@ -412,6 +442,29 @@ h2{font-size:66px;font-weight:800;line-height:1.05}
 <h1 class="rise">The End</h1><div class="tag">Hết tiền, hết tập. Hẹn Mr. Bean ở chuyến sau.</div>
 <div class="album"><div class="pol"><div style="background-image:url(img/g_dinner.jpg)"></div><p>Mỗi hành trình là một kỉ niệm</p></div><div class="pol"><div style="background-image:url(img/g_arch.jpg);background-position:center 70%"></div><p>Những người bạn lâu năm</p></div><div class="pol"><div style="background-image:url(img/g_safari.jpg)"></div><p>Hẹn ngày tái ngộ</p></div></div>
 <div class="clip">Xem clip chuyến đi (Thâu Skyler đạo diễn): <a href="https://www.youtube.com/watch?v=BxCrPEv0mcE">youtube.com/watch?v=BxCrPEv0mcE</a></div>
+</section>
+<section class="slide post"><svg class="st mrb" viewBox="0 0 170 270" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<rect x="54" y="192" width="24" height="60" fill="#3A3633"/><rect x="90" y="192" width="24" height="60" fill="#3A3633"/>
+<ellipse cx="62" cy="256" rx="20" ry="8" fill="#1B1A17"/><ellipse cx="106" cy="256" rx="20" ry="8" fill="#1B1A17"/>
+<path d="M44 124 L28 184" stroke-width="18"/><path d="M44 124 L28 184" stroke="#7A5A3C" stroke-width="11"/>
+<path d="M126 122 L154 72" stroke-width="18"/><path d="M126 122 L154 72" stroke="#7A5A3C" stroke-width="11"/>
+<circle cx="27" cy="190" r="9" fill="#F1C9A5"/><circle cx="157" cy="64" r="10" fill="#F1C9A5"/>
+<path d="M40 116 Q84 104 128 116 L134 198 L34 198 Z" fill="#7A5A3C"/>
+<path d="M70 110 L84 146 L98 110 Z" fill="#FFFFFF"/>
+<path d="M81 116 L87 116 L86 156 L84 162 L82 156 Z" fill="#C0392B"/>
+<rect x="76" y="94" width="16" height="16" fill="#F1C9A5"/>
+<ellipse cx="84" cy="60" rx="31" ry="39" fill="#F1C9A5"/>
+<path d="M53 54 Q50 18 84 18 Q118 18 115 54 Q104 34 76 38 Q60 40 53 54 Z" fill="#3B2A1E"/>
+<path d="M62 46 Q68 38 75 46 M93 46 Q99 38 106 46" fill="none"/>
+<circle cx="69" cy="58" r="3.5" fill="#1B1A17"/><circle cx="99" cy="58" r="3.5" fill="#1B1A17"/>
+<path d="M84 58 Q92 72 82 74" fill="none"/><path d="M66 84 Q84 96 102 84" fill="none"/></g></svg><svg class="st reliant" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#1B1A17" stroke-width="5" stroke-linejoin="round">
+<path d="M16 98 L20 62 Q22 50 38 48 L92 46 L124 18 L206 18 Q218 18 228 30 L262 62 Q286 66 286 98 Z" fill="#8FC3E6"/>
+<path d="M130 28 L166 28 L166 52 L106 52 Z M176 28 L206 28 L230 54 L176 54 Z" fill="#EAF5FB"/>
+<path d="M262 74 L284 76" fill="none"/><rect x="24" y="66" width="20" height="10" rx="3" fill="#F2D06B"/>
+<circle cx="72" cy="100" r="22" fill="#1B1A17"/><circle cx="72" cy="100" r="8" fill="#B9B4A8"/>
+<circle cx="240" cy="104" r="16" fill="#1B1A17"/><circle cx="240" cy="104" r="6" fill="#B9B4A8"/></g></svg>
+<div class="ph"><div class="kick">Cảnh sau credit</div><h2>Huy Bean, tập đặc biệt</h2></div>
+<div class="beam"></div><svg class="ufo" viewBox="0 0 420 170"><ellipse cx="210" cy="78" rx="78" ry="58" fill="#BFE6F2" stroke="#1B1A17" stroke-width="6"/><ellipse cx="190" cy="58" rx="22" ry="12" fill="#fff" opacity=".7"/><ellipse cx="210" cy="108" rx="200" ry="44" fill="#9AA7A8" stroke="#1B1A17" stroke-width="6"/><ellipse cx="210" cy="100" rx="200" ry="30" fill="#C9D3D3"/><g stroke="#1B1A17" stroke-width="4"><circle cx="90" cy="112" r="11" fill="#A9C24B"/><circle cx="160" cy="122" r="11" fill="#F2C14E"/><circle cx="260" cy="122" r="11" fill="#A9C24B"/><circle cx="330" cy="112" r="11" fill="#F2C14E"/></g></svg><div class="drop"><div class="tv"><video src="img/huy-bean.mp4" poster="img/huy-bean.jpg" autoplay muted loop playsinline preload="auto"></video><span class="cap">Quay bởi Thâu Skyler · Phú Quốc 2026</span><i class="knob k1"></i><i class="knob k2"></i></div></div>
 </section>
 
 </div></div>
